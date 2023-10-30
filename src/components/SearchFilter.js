@@ -5,7 +5,7 @@ const SearchFilter = (props) => {
     //array.map and generate the options dynamically
    
     // props.houseCounty.map((item)=>{
-    //     return (!arrCounty.includes(item.county) && arrCounty.push(item.county))   
+    //     return (!arrCounty.(item.county) && arrCounty.push(item.county))   
     // })
     let arrCounty =props.houseCounty.map((item)=>{
         return item.county

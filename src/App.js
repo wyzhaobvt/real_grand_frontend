@@ -10,6 +10,8 @@ import SearchResult from './components/SearchResult';
 import SearchHouseDetail from './components/SearchHouseDetail';
 import SignUp from './components/Signup';
 import Login from './components/Login';
+import axios from 'axios';
+import EnquiryList from './components/EnquiryList';
 
 
 function App() {
@@ -21,8 +23,11 @@ function App() {
   useEffect(() => {
     // console.log('in useEffect');
     const fetchData = async ()=>{
-    let resp =  await fetch('/Data.json');
-    let data = await resp.json();
+      let resp = await axios.get('http://localhost:3002')
+      console.log(resp)
+      let data = await resp.data
+    // let resp =  await fetch('http://localhost:3002/');
+    // let data = await resp.json();
     // console.log(' date from json - ');
     // console.log(data);
     setHousesData(data);    
@@ -40,13 +45,14 @@ function App() {
      
            <Header/> 
            {housesData && <SearchFilter houseCounty={housesData}/>}
-
+          
            <Routes>
            <Route path='/signup' element={<SignUp/>}></Route>
            <Route path='/login' element={<Login/>}></Route>
             <Route path='/' element={housesData &&  <House houseinfo={housesData[Math.floor(Math.random()*10)]}/>}></Route>
             <Route path='/searchresult/:county' element={housesData && <SearchResult  houseinfo={housesData}/>}></Route>
             <Route path='/searchedHouse/:houseId' element={housesData && <SearchHouseDetail  houseinfo={housesData}/>}></Route>
+           <Route path='/enquiries' element={<EnquiryList/>}></Route>          
            </Routes>
            <Footer/>
           

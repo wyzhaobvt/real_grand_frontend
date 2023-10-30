@@ -1,15 +1,34 @@
 import { useParams } from "react-router-dom";
-import House from "./House";
+import Enquiry from "./Enquiry";
 const SearchHouseDetail = (props) => {
     let paramsObj = useParams()
     let houseId = paramsObj.houseId
 
     let selectedHouse = props.houseinfo.find((ele)=>ele._id == houseId)
+    let imgSrc = `/img/${selectedHouse.photo}`
 
     return ( <>
         <h1>Searched House</h1>
-        <House houseinfo={selectedHouse}/>
+        <div className="row">
+            <div className="col-sm-6">
+                <b> {selectedHouse.address}, {selectedHouse.county}</b>
+            </div>        
+            <div className="col-sm-6">
+                <b> Price: USD {selectedHouse.price}</b>
+            </div>
+        </div>
+        <div className="row">
+            <div className="col-sm-6 ">
 
+                <img className='img-fluid' src={imgSrc} alt="house"/>
+                
+            </div>
+            <div className="col-sm-6">
+                <p>{selectedHouse.description} </p>
+                {localStorage.getItem("custname")&&<Enquiry houseId={houseId}/>}
+            </div>
+        </div>
+      
         </>)
     //     <div key={item[0].id}>
     //     <div className="row">
