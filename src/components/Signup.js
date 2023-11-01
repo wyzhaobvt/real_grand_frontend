@@ -14,7 +14,7 @@ const SignUp = () => {
           headers:{"content-type":"application/json"}
         }
         try{
-          let resp = await axios.post ('http://localhost:3002/signup',{...signUpObj},options) 
+          let resp = await axios.post (`${process.env.REACT_APP_BACKEND_URL}signup`,{...signUpObj},options) 
           let userdata = resp.data
           console.log(userdata) //checking
           //can check mongodb Atlas to see if user has been added

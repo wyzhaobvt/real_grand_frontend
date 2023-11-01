@@ -17,7 +17,8 @@ const Login = () => {
           const options = {
             headers:{"content-type":"application/json"}
           }
-          let resp = await axios.post('http://localhost:3002/login',{...formObj},options)
+          // let resp = await axios.post('http://localhost:3002/login',{...formObj},options)
+          let resp = await axios.post(`${process.env.REACT_APP_BACKEND_URL}login`,{...formObj},options)
           let userdata = await resp.data;
           console.log(userdata)
           if (userdata !=='Authentication Failed'){
@@ -25,12 +26,12 @@ const Login = () => {
             localStorage.setItem('custemail',userdata.email)
             // sessionStorage.setItem('custname',userdata.name);
             // sessionStorage.setItem('custemail',userdata.email);
-            // if (userdata.role=='realtor'){
-            //   navigate('/enquiries')
-            // }else{
-            // navigate("/")
-            // }
-            ((userdata.role==='realtor')?navigate("/enquiries"):navigate("/"))
+            if (userdata.role==='realtor'){
+              navigate('/enquiries')
+            }else{
+            navigate("/")
+            }
+            // (userdata.role==='realtor')?navigate("/enquiries"):navigate("/") -> will go to catch error
           }
          else{
           setInvalidMsg(true)

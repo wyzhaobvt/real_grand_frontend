@@ -23,7 +23,8 @@ function App() {
   useEffect(() => {
     // console.log('in useEffect');
     const fetchData = async ()=>{
-      let resp = await axios.get('http://localhost:3002')
+      // let resp = await axios.get('http://localhost:3002')
+      let resp = await axios.get(process.env.REACT_APP_BACKEND_URL)
       console.log(resp)
       let data = await resp.data
     // let resp =  await fetch('http://localhost:3002/');

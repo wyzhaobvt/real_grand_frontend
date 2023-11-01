@@ -4,7 +4,7 @@ const EnquiryList = () => {
     let [enquiryData,setEnquiryData]=useState()
     useEffect(()=>{
         const fetchData = async()=>{
-            let resp = await axios.get('http://localhost:3002/allenquiries')
+            let resp = await axios.get(`${process.env.REACT_APP_BACKEND_URL}allenquiries`)
             let data = resp.data
             setEnquiryData(data)
             console.log(enquiryData)
